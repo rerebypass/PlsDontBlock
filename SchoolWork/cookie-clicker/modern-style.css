@@ -1,0 +1,235 @@
+/* --- CSS Variables --- */
+:root {
+    --potato-brown: #a0522d; /* Sienna */
+    --potato-light: #f5deb3; /* Wheat */
+    --background-light: #fdfaf5; /* Very light off-white/beige */
+    --text-dark: #4d4030; /* Dark brown-grey */
+    --text-light: #6b5b45;
+    --accent-green: #8fbc8f; /* DarkSeaGreen */
+    --accent-green-dark: #5a865a;
+    --disabled-grey: #cccccc;
+    --disabled-text: #888888;
+    --white: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+
+    --font-family: 'Inter', sans-serif;
+    --border-radius: 8px;
+    --transition-speed: 0.2s;
+}
+
+/* --- Basic Reset & Body --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align top */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- Game Container --- */
+.game-container {
+    width: 100%;
+    max-width: 500px; /* Adjust as needed */
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 20px var(--shadow-color);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
+/* --- Header --- */
+.game-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.game-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--potato-brown);
+    margin-bottom: 10px;
+}
+
+.score-display {
+    display: flex;
+    justify-content: space-around; /* Space out score and CPS */
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-light);
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: var(--border-radius);
+}
+
+#score, #cps {
+    flex-basis: 50%; /* Give each roughly half the space */
+}
+
+/* --- Clicker Area --- */
+.clicker-area {
+    position: relative;
+    /* Increased margin-bottom to give more space below the potato */
+    margin-bottom: 50px; /* Was 40px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* Add some padding above the potato too */
+    padding-top: 20px;
+}
+
+#potato-image {
+    max-width: 500px;
+
+    /* We also need to force the element's box to be square for border-radius: 50% to work reliably */
+    /* Add this line: */
+    height: 500px; /* Make height equal to max-width */
+    /* height: auto; <-- Remove or comment out this line */
+
+    border-radius: 50%; /* Keep it circular */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: 4px solid var(--potato-light);
+    box-shadow: 0 5px 15px rgba(160, 82, 45, 0.35);
+}
+
+#potato-image:hover {
+    transform: scale(1.05);
+    /* Make hover shadow slightly more prominent */
+    box-shadow: 0 8px 18px rgba(160, 82, 45, 0.45);
+}
+
+#potato-image:active {
+    transform: scale(0.95);
+     /* Slightly adjust active shadow */
+    box-shadow: 0 3px 8px rgba(160, 82, 45, 0.5);
+}
+
+/* --- Upgrades Section --- */
+.upgrades-section {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.upgrades-section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+#upgrades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between upgrade items */
+}
+
+.upgrade-item {
+    background-color: #fcfcfc;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Stack button and cost */
+    align-items: stretch; /* Make button full width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.upgrade-btn {
+    background-color: var(--accent-green);
+    color: var(--white);
+    border: none;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    text-align: center;
+    margin-bottom: 8px; /* Space between button and cost */
+}
+
+.upgrade-btn:hover {
+    background-color: var(--accent-green-dark);
+    transform: translateY(-2px);
+}
+
+.upgrade-btn:active {
+    transform: translateY(0px) scale(0.98);
+}
+
+.upgrade-btn:disabled {
+    background-color: var(--disabled-grey);
+    color: var(--disabled-text);
+    cursor: not-allowed;
+    transform: none; /* Disable hover/active transforms */
+    box-shadow: none;
+}
+
+.upgrade-cost {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    font-weight: 600;
+}
+
+/* --- Footer --- */
+.page-footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .game-container {
+        padding: 20px;
+    }
+    .game-header h1 {
+        font-size: 2rem;
+    }
+    .score-display {
+        font-size: 1rem;
+        flex-direction: column; /* Stack score/cps */
+        gap: 5px;
+        padding: 8px;
+    }
+    #potato-image {
+        max-width: 160px; /* Slightly smaller on very small screens */
+        height: 160px;   /* Match height to max-width */
+    }
+    .clicker-area {
+        margin-bottom: 40px; /* Reduce margin slightly on small screens */
+        padding-top: 10px;
+    }
+    .upgrades-section h2 {
+        font-size: 1.5rem;
+    }
+    .upgrade-btn {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+}

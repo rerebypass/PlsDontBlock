@@ -1,0 +1,162 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #333;
+    color: #eee;
+    font-family: sans-serif;
+    overflow: hidden; /* Prevent scrollbars if elements move slightly */
+}
+
+#game-area {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background-color: #555;
+    border: 3px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden; /* Keep elements inside */
+}
+
+#player, #enemy {
+    position: absolute;
+    width: 80px;
+    height: 100px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Place text at bottom */
+    padding-bottom: 5px;
+    box-sizing: border-box; /* Include padding in height */
+    transition: background-color 0.1s ease, transform 0.1s ease; /* Smooth transitions */
+}
+
+#player {
+    background-color: #4a90e2;
+    left: 50px;
+    bottom: 50px;
+}
+
+#enemy {
+    background-color: #d0021b;
+    right: 50px;
+    bottom: 50px;
+}
+
+/* Visual States */
+#player.blocking {
+    background-color: #ffffff;
+    color: #333;
+    transform: scale(1.05); /* Slightly bigger when blocking */
+}
+
+#enemy.telegraphing {
+    background-color: #ffcc00; /* Yellow warning */
+}
+
+#enemy-signal {
+    position: absolute;
+    top: -25px; /* Position above the enemy */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.1s ease;
+}
+
+#enemy.telegraphing #enemy-signal {
+     opacity: 1; /* Show signal */
+}
+
+.hit {
+    animation: hit-animation 0.2s ease;
+}
+
+@keyframes hit-animation {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); filter: brightness(1.5);}
+    100% { transform: scale(1); filter: brightness(1);}
+}
+
+/* Health Bars */
+.health-bar-container {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: calc(100% - 10px);
+    height: 10px;
+    background-color: #444;
+    border: 1px solid #222;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.health-bar {
+    height: 100%;
+    background-color: #4caf50; /* Green */
+    width: 100%; /* Start full */
+    transition: width 0.2s linear; /* Smooth decrease */
+    border-radius: 2px;
+}
+
+#enemy-health-bar {
+    background-color: #f44336; /* Red */
+}
+
+
+/* Messages and Score */
+#message-area {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 15px;
+    border-radius: 5px;
+    width: 80%;
+}
+
+#message {
+    font-size: 1.1em;
+    margin: 0 0 5px 0;
+    min-height: 1.2em; /* Prevent layout shifts */
+}
+
+#Tutorial {
+    font-size: 1.1em;
+    margin: 0 0 5px 0;
+    min-height: 1.2em; /* Prevent layout shifts */
+}
+
+#score {
+    font-size: 1em;
+    margin: 0;
+}
+
+/* Start Button */
+#start-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+#start-button:hover {
+    background-color: #45a049;
+}
+
+#start-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}

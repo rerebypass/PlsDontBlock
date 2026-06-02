@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Test</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Clicks Per Second (CPS) Test</h1>
+
+        <div class="timer-options">
+            <button class="timer-button" onclick="startTest(2)">2 Seconds</button>
+            <button class="timer-button" onclick="startTest(5)">5 Seconds</button>
+            <button class="timer-button" onclick="startTest(10)">10 Seconds</button>
+        </div>
+
+        <div id="test-area">
+            <p id="instruction">Select a timer above to start the test!</p>
+            <button id="click-button" onclick="countClick()" disabled>Click Me!</button>
+            <p id="click-count">Clicks: 0</p>
+            <p id="cps">CPS: 0</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

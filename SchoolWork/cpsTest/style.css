@@ -1,0 +1,93 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+h1 {
+    font-weight: 700;
+    color: #3d5afe;
+    margin-bottom: 20px;
+}
+
+.timer-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.timer-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3d5afe;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timer-button:hover {
+    background-color: #304ffe;
+}
+
+#test-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#instruction {
+    font-size: 18px;
+    color: #666;
+}
+
+#click-button {
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3d5afe;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#click-button:disabled {
+    background-color: #a5b1ff;
+    cursor: not-allowed;
+}
+
+#click-button:active {
+    transform: scale(0.95);
+}
+
+#click-count, #cps {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}

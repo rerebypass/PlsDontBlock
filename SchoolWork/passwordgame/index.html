@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>###########</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+            align-content: center;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        .rules {
+            text-align: left;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .rule {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #666;
+            display: none;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .hint {
+            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            height: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Password Challenge</h1>
+        <p>Enter a password and complete the rules one by one!</p>
+
+        <input type="text" id="password-input" placeholder="Type your password here...">
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="rules">
+            <div id="rule1" class="rule">Must be at least 8 characters long.</div>
+            <div id="rule2" class="rule">Must include a number.</div>
+            <div id="rule3" class="rule">Must include a special character (!, @, #, $, etc.).</div>
+            <div id="rule4" class="rule">Must not contain the word "password".</div>
+            <div id="rule5" class="rule">Must include the letter "z".</div>
+            <div id="rule6" class="rule">Must include a capitol letter.</div>
+        </div>
+
+        <p class="hint"></p>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById('password-input');
+        const progressBar = document.getElementById('progress-bar');
+        const rules = document.querySelector('.rules');
+        const ruleElements = [
+            document.getElementById('rule1'),
+            document.getElementById('rule2'),
+            document.getElementById('rule3'),
+            document.getElementById('rule4'),
+            document.getElementById('rule5'),
+            document.getElementById('rule6'),
+        ];
+
+        let currentRuleIndex = 0;
+
+        // Show the first rule on load
+        rules.style.display = 'block';
+        ruleElements[currentRuleIndex].style.display = 'block';
+
+        passwordInput.addEventListener('input', function () {
+            const password = passwordInput.value;
+
+            // Check each rule one by one
+            checkRule(password);
+        });
+
+        function checkRule(password) {
+            switch (currentRuleIndex) {
+                case 0:
+                    if (password.length >= 8) {
+                        markRuleAsValid();
+                    }
+                    break;
+                case 1:
+                    if (/\d/.test(password)) {
+                        markRuleAsValid();
+                    }
+                    break;
+                case 2:
+                    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                        markRuleAsValid();
+                    }
+                    break;
+                case 3:
+                    if (!/password/i.test(password)) {
+                        markRuleAsValid();
+                    }
+                    break;
+                case 4:
+                    if (password.includes('z')) {
+                        markRuleAsValid();
+                    }
+                    break;
+                case 5:
+                    if (/[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.test(password)) {
+                        markRuleAsValid();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function markRuleAsValid() {
+            ruleElements[currentRuleIndex].classList.remove('invalid');
+            ruleElements[currentRuleIndex].classList.add('valid');
+
+            // Hide current rule and show the next one if available
+            setTimeout(() => {
+                ruleElements[currentRuleIndex].style.display = 'none';
+                currentRuleIndex++;
+
+                if (currentRuleIndex < ruleElements.length) {
+                    ruleElements[currentRuleIndex].style.display = 'block';
+                }
+
+                // Update progress bar
+                progressBar.style.width = `${(currentRuleIndex / ruleElements.length) * 100}%`;
+            }, 500);
+        }
+    </script>
+
+</body>
+
+</html>
